@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <!-- 彩色日志 -->
+  <!-- 彩色日志依赖的渲染类 -->
+  <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+  <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+  <conversionRule conversionWord="wEx"
+                  converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+  <!-- 彩色日志格式 -->
+  <property name="CONSOLE_LOG_PATTERN"
+            value="${CONSOLE_LOG_PATTERN:-%clr(%d{HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
+  <!-- Console 输出设置 -->
+  <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+      <charset>utf8</charset>
+    </encoder>
+  </appender>
+
+  <!--<logger name="org.springframework" level="INFO"/>-->
+  <!--<logger name="org.apache.tomcat" level="ERROR"/>-->
+  <!--<logger name="org.eclipse" level="ERROR"/>-->
+  <!--<logger name="com.edoneframework" level="INFO"/>-->
+  <!--<logger name="o.apache.shiro" level="ERROR"/>-->
+  <!--<logger name="freemarker.cache" level="ERROR"/>-->
+  <!--<logger name="org.apache.commons.beanutils" level="ERROR"/>-->
+  <!--&lt;!&ndash;<logger name="com.atomikos" level="ERROR"/>&ndash;&gt;-->
+  <!--&lt;!&ndash;<logger name="com.atomikos.jdbc.AtomikosConnectionProxy" level="ERROR"/>&ndash;&gt;-->
+  <!--<logger name="com.alibaba.druid.pool.PreparedStatementPool" level="DEBUG"/>-->
+  <!--<root level="INFO">-->
+  <!--<appender-ref ref="Console"/>-->
+  <!--</root>-->
+
+  <logger name="org.springframework.jdbc.core.JdbcTemplate"  level="DEBUG" />
+  <!--<logger name="org.springframework.web.servlet.support.RequestContext"  level="ERROR" />-->
+  <logger name="org.springframework" level="INFO"/>
+  <logger name="org.apache.tomcat" level="ERROR"/>
+  <logger name="org.eclipse" level="ERROR"/>
+  <logger name="com.edoneframework" level="INFO"/>
+  <logger name="o.apache.shiro" level="ERROR"/>
+  <logger name="freemarker.cache" level="ERROR"/>
+  <logger name="org.apache.commons.beanutils" level="ERROR"/>
+  <!--<logger name="com.atomikos" level="ERROR"/>-->
+  <!--<logger name="com.atomikos.jdbc.AtomikosConnectionProxy" level="ERROR"/>-->
+
+  按天生成日志
+  <appender name="logFile"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <Prudent>true</Prudent>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <FileNamePattern>
+        edan-ebuyhouse-web/webLog/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}.log
+      </FileNamePattern>
+    </rollingPolicy>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>
+        %d{yyyy-MM-dd HH:mm:ss} -%msg%n
+      </Pattern>
+    </layout>
+  </appender>
+  <logger name="com.alibaba.druid.pool.PreparedStatementPool" level="ERROR"/>
+  <root level="INFO">
+    <appender-ref ref="Console"/>
+    <appender-ref ref="logFile"/>
+  </root>
+</configuration>

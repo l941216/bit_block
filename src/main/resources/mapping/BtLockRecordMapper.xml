@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bluebooth.mapper.BtLockRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.bluebooth.entity.BtLockRecord" >
+    <id column="record_id" property="recordId" jdbcType="VARCHAR" />
+    <result column="fk_bond_id" property="fkBondId" jdbcType="VARCHAR" />
+    <result column="fk_auth_customer" property="fkAuthCustomer" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="BIGINT" />
+    <result column="action_type" property="actionType" jdbcType="TINYINT" />
+    <result column="key_status" property="keyStatus" jdbcType="TINYINT" />
+    <result column="read_status" property="readStatus" jdbcType="TINYINT" />
+    <result column="par_id" property="parId" jdbcType="VARCHAR" />
+    <result column="is_send" property="isSend" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    record_id, fk_bond_id, fk_auth_customer, add_time, action_type, key_status, read_status, 
+    par_id, is_send
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bt_lock_record
+    where record_id = #{recordId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bt_lock_record
+    where record_id = #{recordId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bluebooth.entity.BtLockRecord" >
+    insert into bt_lock_record (record_id, fk_bond_id, fk_auth_customer, 
+      add_time, action_type, key_status, 
+      read_status, par_id, is_send
+      )
+    values (#{recordId,jdbcType=VARCHAR}, #{fkBondId,jdbcType=VARCHAR}, #{fkAuthCustomer,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=BIGINT}, #{actionType,jdbcType=TINYINT}, #{keyStatus,jdbcType=TINYINT}, 
+      #{readStatus,jdbcType=TINYINT}, #{parId,jdbcType=BIGINT}, #{isSend,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bluebooth.entity.BtLockRecord" >
+    insert into bt_lock_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recordId != null" >
+        record_id,
+      </if>
+      <if test="fkBondId != null" >
+        fk_bond_id,
+      </if>
+      <if test="fkAuthCustomer != null" >
+        fk_auth_customer,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="actionType != null" >
+        action_type,
+      </if>
+      <if test="keyStatus != null" >
+        key_status,
+      </if>
+      <if test="readStatus != null" >
+        read_status,
+      </if>
+      <if test="parId != null" >
+        par_id,
+      </if>
+      <if test="isSend != null" >
+        is_send,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recordId != null" >
+        #{recordId,jdbcType=VARCHAR},
+      </if>
+      <if test="fkBondId != null" >
+        #{fkBondId,jdbcType=VARCHAR},
+      </if>
+      <if test="fkAuthCustomer != null" >
+        #{fkAuthCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=BIGINT},
+      </if>
+      <if test="actionType != null" >
+        #{actionType,jdbcType=TINYINT},
+      </if>
+      <if test="keyStatus != null" >
+        #{keyStatus,jdbcType=TINYINT},
+      </if>
+      <if test="readStatus != null" >
+        #{readStatus,jdbcType=TINYINT},
+      </if>
+      <if test="parId != null" >
+        #{parId,jdbcType=BIGINT},
+      </if>
+      <if test="isSend != null" >
+        #{isSend,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bluebooth.entity.BtLockRecord" >
+    update bt_lock_record
+    <set >
+      <if test="fkBondId != null" >
+        fk_bond_id = #{fkBondId,jdbcType=VARCHAR},
+      </if>
+      <if test="fkAuthCustomer != null" >
+        fk_auth_customer = #{fkAuthCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=BIGINT},
+      </if>
+      <if test="actionType != null" >
+        action_type = #{actionType,jdbcType=TINYINT},
+      </if>
+      <if test="keyStatus != null" >
+        key_status = #{keyStatus,jdbcType=TINYINT},
+      </if>
+      <if test="readStatus != null" >
+        read_status = #{readStatus,jdbcType=TINYINT},
+      </if>
+      <if test="parId != null" >
+        par_id = #{parId,jdbcType=BIGINT},
+      </if>
+      <if test="isSend != null" >
+        is_send = #{isSend,jdbcType=INTEGER},
+      </if>
+    </set>
+    where record_id = #{recordId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bluebooth.entity.BtLockRecord" >
+    update bt_lock_record
+    set fk_bond_id = #{fkBondId,jdbcType=VARCHAR},
+      fk_auth_customer = #{fkAuthCustomer,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=BIGINT},
+      action_type = #{actionType,jdbcType=TINYINT},
+      key_status = #{keyStatus,jdbcType=TINYINT},
+      read_status = #{readStatus,jdbcType=TINYINT},
+      par_id = #{parId,jdbcType=BIGINT},
+      is_send = #{isSend,jdbcType=INTEGER}
+    where record_id = #{recordId,jdbcType=VARCHAR}
+  </update>
+</mapper>

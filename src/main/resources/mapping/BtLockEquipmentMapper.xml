@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bluebooth.mapper.BtLockEquipmentMapper" >
+  <resultMap id="BaseResultMap" type="com.bluebooth.entity.BtLockEquipment" >
+    <id column="equipment_id" property="equipmentId" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="BIGINT" />
+    <result column="ver_code" property="verCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    equipment_id, mac, add_time, ver_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bt_lock_equipment
+    where equipment_id = #{equipmentId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bt_lock_equipment
+    where equipment_id = #{equipmentId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bluebooth.entity.BtLockEquipment" >
+    insert into bt_lock_equipment (equipment_id, mac, add_time, 
+      ver_code)
+    values (#{equipmentId,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, #{addTime,jdbcType=BIGINT}, 
+      #{verCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bluebooth.entity.BtLockEquipment" >
+    insert into bt_lock_equipment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="equipmentId != null" >
+        equipment_id,
+      </if>
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="verCode != null" >
+        ver_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="equipmentId != null" >
+        #{equipmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=BIGINT},
+      </if>
+      <if test="verCode != null" >
+        #{verCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bluebooth.entity.BtLockEquipment" >
+    update bt_lock_equipment
+    <set >
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=BIGINT},
+      </if>
+      <if test="verCode != null" >
+        ver_code = #{verCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where equipment_id = #{equipmentId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bluebooth.entity.BtLockEquipment" >
+    update bt_lock_equipment
+    set mac = #{mac,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=BIGINT},
+      ver_code = #{verCode,jdbcType=VARCHAR}
+    where equipment_id = #{equipmentId,jdbcType=VARCHAR}
+  </update>
+</mapper>
